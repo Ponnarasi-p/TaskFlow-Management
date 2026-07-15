@@ -6,6 +6,9 @@ const UserResponseDto = require("../DTO/userResponseDto");
 
 const MESSAGES = require("../constants/messages");
 
+const ApiError = require("../errors/ApiError");
+const HTTP_STATUS = require("../constants/httpStatusConstants");
+
 const createEmployee = async (employeeDto) => {
 
     const existingUser =
@@ -15,9 +18,13 @@ const createEmployee = async (employeeDto) => {
 
     if (existingUser && existingUser.isActive) {
 
-        throw new Error(
-            MESSAGES.USER.EMAIL_EXISTS
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.CONFLICT,
+
+    MESSAGES.USER.EMAIL_EXISTS
+
+);
 
     }
 
@@ -72,9 +79,13 @@ const getEmployeeById = async (id) => {
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.USER.INVALID_EMPLOYEE_ID
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.USER.INVALID_EMPLOYEE_ID
+
+);
 
     }
 
@@ -83,9 +94,13 @@ const getEmployeeById = async (id) => {
 
     if (!employee) {
 
-        throw new Error(
-            MESSAGES.USER.EMPLOYEE_NOT_FOUND
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.USER.EMPLOYEE_NOT_FOUND
+
+);
 
     }
 
@@ -100,9 +115,13 @@ const updateEmployee = async (
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.USER.INVALID_EMPLOYEE_ID
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.USER.INVALID_EMPLOYEE_ID
+
+);
 
     }
 
@@ -111,9 +130,13 @@ const updateEmployee = async (
 
     if (!employee) {
 
-        throw new Error(
-            MESSAGES.USER.EMPLOYEE_NOT_FOUND
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.USER.EMPLOYEE_NOT_FOUND
+
+);
 
     }
 
@@ -132,9 +155,13 @@ const updateEmployee = async (
             existingUser.isActive
         ) {
 
-            throw new Error(
-                MESSAGES.USER.EMAIL_EXISTS
-            );
+           throw new ApiError(
+
+    HTTP_STATUS.CONFLICT,
+
+    MESSAGES.USER.EMAIL_EXISTS
+
+);
 
         }
 
@@ -156,9 +183,13 @@ const deleteEmployee = async (id) => {
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.USER.INVALID_EMPLOYEE_ID
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.USER.INVALID_EMPLOYEE_ID
+
+);
 
     }
 
@@ -167,9 +198,13 @@ const deleteEmployee = async (id) => {
 
     if (!employee) {
 
-        throw new Error(
-            MESSAGES.USER.EMPLOYEE_NOT_FOUND
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.USER.EMPLOYEE_NOT_FOUND
+
+);
 
     }
 

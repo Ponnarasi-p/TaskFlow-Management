@@ -5,6 +5,12 @@ const morgan = require("morgan");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const errorMiddleware =
+require("./middlewares/errorMiddleware");
+const commentRoutes = require("./routes/commentRoutes");
+const dashboardRoutes =
+require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -19,5 +25,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/employees", userRoutes);
 
 app.use("/api/projects", projectRoutes);
+
+app.use("/api/tasks", taskRoutes);
+
+app.use(errorMiddleware);
+
+app.use("/api/comments", commentRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 module.exports = app;

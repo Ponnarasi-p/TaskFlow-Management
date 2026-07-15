@@ -4,6 +4,9 @@ const ProjectResponseDto = require("../DTO/projectResponseDto");
 
 const MESSAGES = require("../constants/messages");
 
+const ApiError = require("../errors/ApiError");
+const HTTP_STATUS = require("../constants/httpStatusConstants");
+
 const createProject = async (projectDto) => {
 
     const existingProject =
@@ -13,9 +16,13 @@ const createProject = async (projectDto) => {
 
     if (existingProject) {
 
-        throw new Error(
-            MESSAGES.PROJECT.PROJECT_ALREADY_EXISTS
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.CONFLICT,
+
+    MESSAGES.PROJECT.PROJECT_ALREADY_EXISTS
+
+);
 
     }
 
@@ -70,9 +77,13 @@ const getProjectById = async (id) => {
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.PROJECT.INVALID_PROJECT_ID
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.PROJECT.INVALID_PROJECT_ID
+
+);
 
     }
 
@@ -81,9 +92,13 @@ const getProjectById = async (id) => {
 
     if (!project) {
 
-        throw new Error(
-            MESSAGES.PROJECT.PROJECT_NOT_FOUND
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.PROJECT.PROJECT_NOT_FOUND
+
+);
 
     }
 
@@ -98,9 +113,13 @@ const updateProject = async (
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.PROJECT.INVALID_PROJECT_ID
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.PROJECT.INVALID_PROJECT_ID
+
+);
 
     }
 
@@ -109,9 +128,13 @@ const updateProject = async (
 
     if (!project) {
 
-        throw new Error(
-            MESSAGES.PROJECT.PROJECT_NOT_FOUND
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.PROJECT.PROJECT_NOT_FOUND
+
+);
 
     }
 
@@ -127,9 +150,13 @@ const updateProject = async (
 
         if (existingProject) {
 
-            throw new Error(
-                MESSAGES.PROJECT.PROJECT_ALREADY_EXISTS
-            );
+          throw new ApiError(
+
+    HTTP_STATUS.CONFLICT,
+
+    MESSAGES.PROJECT.PROJECT_ALREADY_EXISTS
+
+);
 
         }
 
@@ -151,9 +178,13 @@ const deleteProject = async (id) => {
 
     if (isNaN(Number(id))) {
 
-        throw new Error(
-            MESSAGES.PROJECT.INVALID_PROJECT_ID
-        );
+        throw new ApiError(
+
+    HTTP_STATUS.BAD_REQUEST,
+
+    MESSAGES.PROJECT.INVALID_PROJECT_ID
+
+);
 
     }
 
@@ -162,9 +193,13 @@ const deleteProject = async (id) => {
 
     if (!project) {
 
-        throw new Error(
-            MESSAGES.PROJECT.PROJECT_NOT_FOUND
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.NOT_FOUND,
+
+    MESSAGES.PROJECT.PROJECT_NOT_FOUND
+
+);
 
     }
 

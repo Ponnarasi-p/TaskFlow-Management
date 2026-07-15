@@ -6,6 +6,9 @@ const { generateToken } = require("../utils/tokenUtil");
 
 const MESSAGES = require("../constants/messages");
 
+const ApiError = require("../errors/ApiError");
+const HTTP_STATUS = require("../constants/httpStatusConstants");
+
 const login = async (loginDto) => {
 
     const user = await authRepository.findUserByEmail(
@@ -14,9 +17,13 @@ const login = async (loginDto) => {
 
     if (!user || !user.isActive) {
 
-        throw new Error(
-            MESSAGES.AUTH.INVALID_CREDENTIALS
-        );
+      throw new ApiError(
+
+    HTTP_STATUS.UNAUTHORIZED,
+
+    MESSAGES.AUTH.INVALID_CREDENTIALS
+
+);
 
     }
 
@@ -28,9 +35,13 @@ const login = async (loginDto) => {
 
     if (!isPasswordValid) {
 
-        throw new Error(
-            MESSAGES.AUTH.INVALID_CREDENTIALS
-        );
+       throw new ApiError(
+
+    HTTP_STATUS.UNAUTHORIZED,
+
+    MESSAGES.AUTH.INVALID_CREDENTIALS
+
+);
 
     }
 
